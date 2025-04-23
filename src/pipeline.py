@@ -1,6 +1,6 @@
-from diffusers import StableDiffusionPipeline
-import torch
-from PIL import Image
+from diffusers import StableDiffusionPipeline   #MODELO GENERATIVO (PARA GENERAR IMÁGENES)
+import torch                                    #PARA MANEJAR TENSORES, MODELOS Y EL HARDWARE
+from PIL import Image                           # PARA MOSTRAR IMÁGENES EN LOS NOTEBOOKS
 from IPython.display import display
 
 def load_model(model_name = "runwayml/stable-diffusion-v1-5"):
