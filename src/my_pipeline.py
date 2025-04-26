@@ -69,4 +69,12 @@ def show_image(image):
 def save_image(image, output_path):
     """ 
     Guarda una imagen generada en un archivo
-    """   
+    
+    Parámetros:
+    - image: imagen generada (PIL.Image)
+    - output_path (str): ruta completa del archivo a guardar (debe terminar en .png o .jpg)
+    """
+    #CREA EL DIRECTORIO SI NO EXISTE
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
+    image.save(output_path)
