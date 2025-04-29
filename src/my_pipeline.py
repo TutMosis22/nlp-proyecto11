@@ -78,3 +78,21 @@ def save_image(image, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
     image.save(output_path)
+    
+from diffusers import StableDiffusionImg2ImagePipeline
+import requests    
+    
+def image_to_image(prompt, init_image_path, strenght = 0.75, guidance_scale = 7.5):
+    model_id = "runwayml/stable-diffusion-v1-5"
+    pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
+        model_id,
+        torch_dtype=torch.float16,
+        revision="fp16"
+    )
+    pipe = pipe.to("cuda")
+    
+    init_image = Image.open(init_image_path).convert("RGB").resize((512, 512))
+    
+    image = pipe(promt=prompt, image=init_image, strength=strenght, guidance_scale=guidance_scale).images[0]
+    
+    return image
