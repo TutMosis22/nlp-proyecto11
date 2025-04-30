@@ -5,6 +5,9 @@ from IPython.display import display
 import os
 import matplotlib.pyplot as plt
 
+from diffusers import StableDiffusionImg2ImgPipeline
+import requests   
+
 def load_model(model_name = "runwayml/stable-diffusion-v1-5", use_cuda=True):
     """
     Carga el modelo de difusión estable desde Hugging Face y lo envía a la GPU si está disponible
@@ -79,20 +82,20 @@ def save_image(image, output_path):
     
     image.save(output_path)
     
-from diffusers import StableDiffusionImg2ImagePipeline
-import requests    
+#from diffusers import StableDiffusionImg2ImagePipeline
+#import requests    
     
 def image_to_image(prompt, init_image_path, strenght = 0.75, guidance_scale = 7.5):
     model_id = "runwayml/stable-diffusion-v1-5"
     pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
         model_id,
-        torch_dtype=torch.float16,
-        revision="fp16"
+        torch_dtype=torch.float16
+        #revision="fp16"
     )
     pipe = pipe.to("cuda")
     
     init_image = Image.open(init_image_path).convert("RGB").resize((512, 512))
     
-    image = pipe(promt=prompt, image=init_image, strength=strenght, guidance_scale=guidance_scale).images[0]
+    image = pipe(prompt=prompt, image=init_image, strength=strenght, guidance_scale=guidance_scale).images[0]
     
     return image
