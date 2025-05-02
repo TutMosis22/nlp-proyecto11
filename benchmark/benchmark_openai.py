@@ -1,17 +1,22 @@
 import os
-import openai
+from openai import OpenAI
 import requests
 from PIL import Image
 from io import BytesIO
+from dotenv import load_dotenv
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+load_dotenv()
+
+api_key = os.getenv("OPENAI_API_KEY")
+
+client = OpenAI(api_key=api_key)
 
 #PROMPT DE PRUEBA
 prompt = "A futuristic cityscape at sunset"
 
 # LLAMAMOS A LA API DE OPEN AI PARA GEENRAR UNA IMAGEN
-response = openai.images.generate(
-    model="dall-e-3",  
+response = client.images.generate(
+    model="dall-e-3",
     prompt=prompt,
     size="1024x1024",
     quality="standard",
@@ -26,4 +31,4 @@ image_response = requests.get(image_url)
 image = Image.open(BytesIO(image_response.content))
 image.save("dalle_output.png")
 
-print("Imagen generada con OpenAI y guardada como benchmark/dalle_output.png")
+print("Imagen generada con OpenAI y guardada como dalle_output.png")
