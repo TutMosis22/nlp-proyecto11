@@ -1,5 +1,3 @@
-# benchmark/benchmark_diffusers.py
-
 import time
 import torch
 from diffusers import StableDiffusionImg2ImgPipeline
