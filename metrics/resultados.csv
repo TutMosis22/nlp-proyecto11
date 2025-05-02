@@ -1,2 +1,8 @@
 prompt,tiempo_segundos
 a robot flying in space,671.0411791801453
+
+
+=== BENCHMARK DIFFUSERS ===
+Tiempo total (s): 354.70
+Uso de memoria antes (MB): 467.26
+Uso de memoria después (MB): 4276.93
