@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 from diffusers import StableDiffusionImg2ImgPipeline
 import requests   
 
+from torchvision import transforms, models
+
 def load_model(model_name = "runwayml/stable-diffusion-v1-5", use_cuda=True):
     """
     Carga el modelo de difusión estable desde Hugging Face y lo envía a la GPU si está disponible
@@ -99,3 +101,33 @@ def image_to_image(prompt, init_image_path, strenght = 0.75, guidance_scale = 7.
     image = pipe(prompt=prompt, image=init_image, strength=strenght, guidance_scale=guidance_scale).images[0]
     
     return image
+
+def stylize_image(content_img_path, output_path = "metrics/stylized_image.png"):
+    device =torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
+    #CARAR IMAGEN DE CONTENIDO
+    content_image = Image.open(content_img_path).convert("RGB")
+    transform = transforms.Compose([
+        transforms.Resize((512, 512)),
+        transform.ToTensor(),
+        transforms.Lambda(lambda x: x.mul(255))
+    ])
+    content_tensor = transform(content_image).unsqueeze(0).to(device)
+    
+    #CARGAR ESTILO (USARÉ UN MODELO PREENTRENADO ESTILO "CANDY")
+    style_model = models.segmentation.deeplabv3_resnet101(pretrained = True).to(device)
+    style_model.eval()            #SOLO INFERENCIA, NO ENTRENAMIENTO
+    
+    #EN ESTE EJEMPLO SE APLICA UN CAMBIO SIMULADO CON UNA CONVOLUCIÓN PARA DEMOSTRAR ESTILO
+    # TAMBIÉN LO PODEMOS REEMPALZAR CON MODELOS REALES COMO 'pystiche', 'fast-neural-style'
+    with torch.no_grad():
+        stylized = torch.nn.functional.avg_pool2d(content_tensor, kernel_size = 3, stride = 1, padding = 1)
+        
+    #CONVERTIMOS EL TENSOR DE NUEVO A IMAGEN
+    stylized_image = stylized.squeeze().permute(1, 2, 0).clamp(0, 255).cpu().numpy().astype("uint8")
+    result_image = Image.fromarray(stylized_image)
+    result_image.save(output_path)
+    
+    print(f"Imagen estilizada guardada en {output_path}")
+    
+    return result_image
