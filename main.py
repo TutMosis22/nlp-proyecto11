@@ -17,3 +17,11 @@ image_path="assets/dibujo_mio.png",
 mask_path = "assets/mi_dibujo_mascara.png",
 save_path = "metrics/dibujo_pintado.png"
 )
+
+from src.openai_generator import generate_text_with_openai
+
+#PROMPT DE EJMEPLO PARA HACER PRUEBA
+prompt = "Escribe una descripción creativa de una imagen de una ciudad futurista al atardecer."
+
+output = generate_text_with_openai(prompt)
+print("Texto generado por OpenAI:\n", output)
