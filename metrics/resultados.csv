@@ -13,3 +13,7 @@ openai-dalle3,A futuristic cityscape at sunset,17.07,1710.94
 Tiempo total: 110.54 segundos
 Memoria antes: 2845.96 MB
 Memoria después: 2335.14 MB
+
+transformers,A futuristic cityscape at sunset,36.61,NA,benchmark\transformers_image_1.png
+transformers,"A fantasy castle in the mountains, digital art",38.04,NA,benchmark\transformers_image_2.png
+transformers,"A cat playing chess with a dog, photorealistic",35.15,NA,benchmark\transformers_image_3.png
