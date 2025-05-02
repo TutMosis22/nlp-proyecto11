@@ -131,3 +131,25 @@ def stylize_image(content_img_path, output_path = "metrics/stylized_image.png"):
     print(f"Imagen estilizada guardada en {output_path}")
     
     return result_image
+
+#PARA LA MÁSCARA, PERO AL FINAL NO ME CARGÓ :(
+from diffusers import StableDiffusionInpaintPipeline
+
+def inpaint_image(prompt, image_path, mask_path, save_path=None):
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    
+    pipe = StableDiffusionInpaintPipeline.from_pretrained(
+        "runwayml/stable-diffusion-inpainting",
+        torch_dtype=torch.float16 if device == "cuda" else torch.float32
+    )
+    pipe = pipe.to(device)
+    
+    init_image = Image.open(image_path).convert("RGB").resize((512, 512))
+    mask_image = Image.open(mask_path).convert("RGB").resize((512, 512))
+    
+    result = pipe(prompt=prompt, image=init_image, mask_image=mask_image).images[0]
+    
+    result.show()
+    
+    if save_path:
+        result.save(save_path)
