@@ -10,7 +10,9 @@ save_image(result_image, "metrics/man_jacket.png")
 original_path = "assets/dibujo_mio.png"
 stylized_image = stylize_image(original_path)
 
+inpaint_image(
 prompt = "una version futurista del dibujo original",
-image_path="assets/dibujo_mio.png"
+image_path="assets/dibujo_mio.png",
 mask_path = "assets/mi_dibujo_mascara.png",
 save_path = "metrics/dibujo_pintado.png"
+)
