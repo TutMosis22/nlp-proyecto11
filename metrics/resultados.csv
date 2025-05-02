@@ -8,3 +8,8 @@ Uso de memoria antes (MB): 467.26
 Uso de memoria después (MB): 4276.93
 
 openai-dalle3,A futuristic cityscape at sunset,17.07,1710.94
+
+=== BENCHMARK TRANSFORMERS ===
+Tiempo total: 110.54 segundos
+Memoria antes: 2845.96 MB
+Memoria después: 2335.14 MB
