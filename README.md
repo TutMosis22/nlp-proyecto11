@@ -7,10 +7,10 @@ Este proyecto tiene como finalidad evaluar y comparar diversas librerías de IA 
 - **Transformers (Hugging Face)**: Modelos preentrenados, decodificación con sampling (`top-k`, `nucleus`, `beam`).
 - **OpenAI API**: Acceso a modelos tipo `gpt-*` vía REST API.
 - **Diffusers**: Generación de imágenes con `StableDiffusionPipeline`.
-- **Métricas**: BLEU, ROUGE-L, METEOR, Self-BLEU, etc.
+- **Métricas**: BLEU, ROUGE-L, METEOR, Self-BLEU, SSIM y PSNR.
 
 ## 📁 Estructura del repositorio
-- **src/** # Código fuente organizado por componentes 
+- **src/**  Código fuente organizado por componentes 
 - **notebooks/**  Cuadernos de prueba, métricas y visualizaciones 
 - **metrics/**  Métricas y resultados numéricos o gráficos 
 - **docs/**  Documentación y presentación final
@@ -19,7 +19,7 @@ Este proyecto tiene como finalidad evaluar y comparar diversas librerías de IA 
 ## 🧪 Cómo ejecutar
 ### Requisitos
 - Python
-- pip + virtualenv o Conda (opcional)
+- pip + virtualenv
 - Acceso a Google Colab o entorno local
 
 ### Ejecución local
