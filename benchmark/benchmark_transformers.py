@@ -12,17 +12,17 @@ prompts = [
     "A cat playing chess with a dog, photorealistic"
 ]
 
-# Cargar el modelo desde Hugging Face (puede demorar un poco)
+# SE CARGA EL MODELO DESDE HUGGING FACE (demora un poco)
 print("Cargando modelo desde transformers...")
 pipe = StableDiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2", torch_dtype=torch.float16)
 pipe = pipe.to("cuda" if torch.cuda.is_available() else "cpu")
 print("Modelo cargado.")
 
-# Preparar ruta para guardar imágenes
+#RUTA PARA GUARDAR IMÁGENES
 output_dir = "benchmark"
 os.makedirs(output_dir, exist_ok=True)
 
-# Ruta del CSV para guardar métricas
+#RUTA DEL CSV PARA GUARDAR MÉTRICAS
 csv_file = os.path.join("metrics", "resultados.csv")
 os.makedirs("metrics", exist_ok=True)
 
@@ -30,7 +30,7 @@ os.makedirs("metrics", exist_ok=True)
 mem_before = psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024  # en MB
 start_time = time.time()
 
-# Generar imágenes y guardar métricas por prompt
+# SE GENERAN LAS IMÁGENES Y SE GUARDAN MÉTRICAS POR PROMPT
 for i, prompt in enumerate(prompts):
     prompt_start = time.time()
     image = pipe(prompt).images[0]
