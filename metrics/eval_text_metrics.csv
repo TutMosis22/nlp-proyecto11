@@ -1,0 +1,10 @@
+Prompt,Modelo,BLEU,ROUGE-L,METEOR
+Describe una imagen de una ciudad futurista al atardecer.,openai,0.0403,0.2381,0.1694
+Describe una imagen de una ciudad futurista al atardecer.,diffusers,0.12,0.2381,0.1535
+Describe una imagen de una ciudad futurista al atardecer.,transformers,0.1433,0.3061,0.2052
+Inventa una historia de ciencia ficción en 3 líneas.,openai,0.0146,0.0816,0.1034
+Inventa una historia de ciencia ficción en 3 líneas.,diffusers,0.1058,0.0816,0.136
+Inventa una historia de ciencia ficción en 3 líneas.,transformers,0.1269,0.1474,0.1573
+Escribe una descripción poética de un bosque encantado.,openai,0.0132,0.1149,0.0905
+Escribe una descripción poética de un bosque encantado.,diffusers,0.1398,0.1149,0.2824
+Escribe una descripción poética de un bosque encantado.,transformers,0.1444,0.1333,0.289
