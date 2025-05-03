@@ -1,0 +1,7 @@
+imagen_generada,modelo,ssim,psnr
+diffusers_output.png,diffusers,0.4577795412467632,15.267129393742616
+openai_dalle_output.png,openai,0.18961334187861179,7.221355495454439
+openai_dalle_output2.png,openai,0.19355015872088252,6.832752665455212
+transformers_image_1.png,transformers,0.27590490465771444,7.579806102023635
+transformers_image_2.png,transformers,0.18904533147049243,7.2381658120174315
+transformers_image_3.png,transformers,0.28902391668272387,6.524139254506501
