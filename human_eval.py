@@ -6,7 +6,7 @@ import random
 app = Flask(__name__)
 RESULTS_CSV = "metrics/resultados_humanos.csv"
 
-# Puedes modificar aquí el nombre de las imágenes que deseas mostrar
+#AQUÍ MODIFICO DEPENDIENDO DE LAS IMÁGENES QUE SE EVALUARÁN
 IMAGENES = [
     ("openai", "openai_cityscape.png"),
     ("transformers", "transformers_cityscape.png"),
