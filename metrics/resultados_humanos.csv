@@ -1,0 +1,3 @@
+prompt,"('openai', 'openai_cityscape.png')_realismo","('openai', 'openai_cityscape.png')_correspondencia","('openai', 'openai_cityscape.png')_calidad","('openai', 'openai_cityscape.png')_preferencia","('transformers', 'transformers_cityscape.png')_realismo","('transformers', 'transformers_cityscape.png')_correspondencia","('transformers', 'transformers_cityscape.png')_calidad","('transformers', 'transformers_cityscape.png')_preferencia","('diffusers', 'diffusers_cityscape.png')_realismo","('diffusers', 'diffusers_cityscape.png')_correspondencia","('diffusers', 'diffusers_cityscape.png')_calidad","('diffusers', 'diffusers_cityscape.png')_preferencia"
+cityscape,3,3,3,2,3,3,4,2,5,5,4,5
+cityscape,2,1,3,2,3,3,4,1,4,4,4,5
