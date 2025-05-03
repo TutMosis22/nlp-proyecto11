@@ -1,0 +1,4 @@
+Modelo,Self-BLEU
+openai,0.0176
+diffusers,0.0128
+transformers,0.0273
