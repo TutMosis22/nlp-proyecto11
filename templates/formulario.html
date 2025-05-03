@@ -6,18 +6,26 @@
 </head>
 <body>
     <h1>Evaluación de imágenes generadas</h1>
-    <p>Prompt: <strong>cityscape</strong></p>
+    <p>Prompt: <strong>A futuristic cityscape at sunset</strong></p>
+
     <p>Imagen de referencia:</p>
-    <img src="{{ imagen_base }}" alt="Imagen base" width="300px">
-    
+    <img src="{{ url_for('static', filename=imagen_base) }}" alt="Imagen base" width="300px">
+
     <form method="post">
-        <h2>¿Cuál de estas imágenes generadas te parece mejor?</h2>
         {% for modelo, ruta in imagenes %}
-            <div style="margin-bottom: 20px;">
-                <label>
-                    <input type="radio" name="mejor_imagen" value="{{ modelo }}" required>
-                    <img src="{{ ruta }}" alt="Imagen generada por {{ modelo }}" width="300px">
-                </label>
+            <div style="margin-bottom: 40px; border: 1px solid #ccc; padding: 10px;">
+                <h2>{{ modelo }}</h2>
+                <img src="{{ url_for('static', filename=ruta) }}" alt="Imagen generada por {{ modelo }}" width="300px"><br><br>
+
+                {% for metrica in ["realismo", "correspondencia", "calidad", "preferencia"] %}
+                    <p><strong>{{ metrica|capitalize }}</strong> (1–5):</p>
+                    {% for i in range(1,6) %}
+                        <label>
+                            <input type="radio" name="{{ modelo }}_{{ metrica }}" value="{{ i }}" required> {{ i }}
+                        </label>
+                    {% endfor %}
+                    <br><br>
+                {% endfor %}
             </div>
         {% endfor %}
         <button type="submit">Enviar evaluación</button>
