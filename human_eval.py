@@ -1,38 +1,51 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
-import random
 import csv
+import random
 
 app = Flask(__name__)
 RESULTS_CSV = "metrics/resultados_humanos.csv"
 
 # Puedes modificar aquí el nombre de las imágenes que deseas mostrar
 IMAGENES = [
-    ("openai", "static/openai_dalle_output.png"),
-    ("transformers", "static/transformers_image_1.png"),
-    ("diffusers", "static/diffusers_output.png"),
+    ("openai", "openai_cityscape.png"),
+    ("transformers", "transformers_cityscape.png"),
+    ("diffusers", "diffusers_cityscape.png"),
 ]
-PROMPT = "A futuristic cityscape at sunset"
 
 @app.route("/", methods=["GET", "POST"])
 def evaluar():
-    if request.method == "POST":
-        seleccion = request.form.get("mejor_imagen")
-        modelo_seleccionado = request.form.get("modelo")
+    metricas = ["realismo", "correspondencia", "calidad", "preferencia"]
+    prompt = "cityscape"
 
+    if request.method == "POST":
+        fila = [prompt]
+        for modelo, _ in IMAGENES:
+            for metrica in metricas:
+                valor = request.form.get(f"{modelo}_{metrica}")
+                fila.append(valor)
+               
+        escribir_encabezados = not os.path.exists(RESULTS_CSV) or os.stat(RESULTS_CSV).st_size == 0        
+                
         with open(RESULTS_CSV, "a", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow([PROMPT, modelo_seleccionado, seleccion])
-
+            if escribir_encabezados:
+                encabezados = (["prompt"] + [
+                    f"{modelo}_{metrica}"
+                    for modelo in IMAGENES
+                    for metrica in metricas
+                ])
+                writer.writerow(encabezados)
+            writer.writerow(fila)
         return redirect(url_for("gracias"))
 
-    # Se baraja el orden de las imágenes para evitar sesgos
-    imagenes_barajadas = IMAGENES.copy()
-    random.shuffle(imagenes_barajadas)
+    imagen_base = "cityscape.png"
+    imagenes_modelos = IMAGENES.copy()
+#    random.shuffle(imagenes_modelos)
 
-    return render_template("formulario.html", 
-                           imagen_base="static/cityscape.png",
-                           imagenes=imagenes_barajadas)
+    return render_template("formulario.html",
+                           imagen_base=imagen_base,
+                           imagenes=imagenes_modelos)
 
 @app.route("/gracias")
 def gracias():
